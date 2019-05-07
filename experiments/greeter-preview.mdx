@@ -1,6 +1,43 @@
 ---
 name: Greeter Preview
 menu: Experiments
+BOI: 5cd1e074cb0082000827d873
 ---
 
+import Editor from '../src/components/Editor'
+
 # Greeter Preview
+
+- Branch: [`greeter-preview`](https://github.com/helpscout/beacon2/tree/greeter-preview)
+- **Stage 0**
+
+## Summary
+
+This feature branch adds a new `greeter-preview` method to the Beacon JavaScript API that can be used by Beacon Builder to show a Greeter preview and modify its contents in real-time. You can play with it in the demo below.
+
+## Demo
+
+<Editor>
+  {
+`Beacon('greeter-preview', {
+  title: "Need help?",
+  subtitle: "The J&G Team is here",
+  message: "The J&G Support Team are always happy to answer your questions and lend a hand with the app. Let's talk...",
+  action: {
+    type: "open-beacon",
+    text: "Contact Us"
+  }
+})`
+  }
+</Editor>
+
+## Acceptance Criteria
+
+- While the preview Greeter is visible, the Beacon enters read-only mode. This means that the FAB can't be clicked, the Greeter can't be closed, and the CTAs won't do anything.
+- You can call the `greeter-preview` method with a value of `null` to return the Beacon to its normal state.
+
+<Editor>
+  {
+`Beacon('greeter-preview', null)`
+  }
+</Editor>
