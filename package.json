@@ -1,0 +1,17 @@
+{
+  "name": "beacon-labs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "docz:dev": "docz dev --typescript",
+    "docz:build": "docz build --typescript"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "docz": "^1.0.4",
+    "docz-theme-default": "^1.0.4"
+  }
+}
