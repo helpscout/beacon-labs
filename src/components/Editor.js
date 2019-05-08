@@ -21,7 +21,9 @@ export default class Editor extends React.Component {
 
   onRun = () => {
     const { code } = this.state
-    eval(code)
+    const script = document.createElement('script')
+    script.textContent = code
+    document.body.appendChild(script)
     this.setState({ dirtyCode: false })
   }
 
