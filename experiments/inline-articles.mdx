@@ -1,0 +1,54 @@
+---
+name: Inline Articles
+menu: Experiments
+BOI: 5cd2ec8e0cd9cd00083ebcaf
+---
+
+import Editor from '../src/components/Editor'
+
+# Inline Articles
+
+- Branch: [`inline-articles`](https://github.com/helpscout/beacon2/tree/inline-articles)
+- **Stage 0**
+
+## What's this?
+
+Initial discovery of the Inline Articles feature. This is based on [a spec](https://trello.com/c/v6tP7T3X/19-5-in-page-article-links) that Buzz created over a year ago, so it probably needs review. This page serves as a playground for testing and experimentation.
+
+## Demo
+
+<div>
+  <h3>Take this for a spin: <a href="#" data-beacon-article-inline="5cac9a5d2c7d3a154461f02c">click here 👈</a></h3>
+</div>
+
+## How it works
+
+The usage is really similar to the feature that opens an article in Beacon by adding the `data-beacon-article` attribute to a link, except that for it to open "inline", you'll use the `data-beacon-article-inline` attribute:
+
+```
+<a href="#" data-beacon-article-inline="5cac9a5d2c7d3a154461f02c">Click here</a>
+```
+
+## Additional Exploration
+
+The groundwork for this feature involves setting up a new `iframe` to hold the Article and display _outside_ of the Beacon.
+Once we have this in place, we can play with formats to open an article with relatively little effort. Here are a couple of examples:
+
+### `data-beacon-article-modal`
+
+<ul>
+  <li>Open Article in a modal: <a href="#" data-beacon-article-modal="5cac9a5d2c7d3a154461f02c">click here 👈</a></li>
+</ul>
+
+### `data-beacon-article-sidebar`
+
+<ul>
+  <li>Open Article in a sidebar: <a href="#" data-beacon-article-sidebar="5cac9a5d2c7d3a154461f02c">click here 👈</a></li>
+</ul>
+
+## Known Issues
+
+- There are a couple of styling issues with the article's contents.
+- The scalation modal doesn't work. If you leave bad feedback for an article nothing will happen and you'll probably need to refresh the page to continue testing.
+- Scrolling messes up with the positioning. If you scroll before clicking the link, it will be off by the amount of pixels you scrolled.
+- This probably needs to be aware of the available space to the right, left, top, and bottom of the link so that we position it correctly no matter where the link is on the page.
