@@ -13,5 +13,8 @@
   "devDependencies": {
     "docz": "^1.0.4",
     "docz-theme-default": "^1.0.4"
+  },
+  "dependencies": {
+    "@helpscout/hsds-react": "^2.41.1"
   }
 }

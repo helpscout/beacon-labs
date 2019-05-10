@@ -100,6 +100,7 @@ const initBeacon = (beaconId) => {
 }
 
 const defaultBeaconBuild = 'https://beacon-v2.helpscout.net'
+// const defaultBeaconBuild = 'http://localhost:5000/static/js/main.2.1.js'
 const defaultBeaconId = '879c4d54-f2d3-4b1b-831d-96498de9bfb7'
 const loadBeacon = (id, BOI) => {
   const beaconId = id || defaultBeaconId;

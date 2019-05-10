@@ -1,0 +1,93 @@
+---
+name: Show Me
+menu: Experiments
+BOI: 5cd5f6c46a3ff00008be9598
+---
+
+import Editor from '../src/components/Editor'
+import Profile from '../src/components/Profile'
+
+# "Show Me" Feature
+
+- Branch: [`show-me`](https://github.com/helpscout/beacon2/tree/show-me)
+- **Stage 0**
+
+## What's this?
+
+A visual helper for giving instructions via a Docs Article. Read the **Motivation** section below for an example.
+
+_Note: This isn't based on specs of any kind, it's just Maxi's random idea._
+
+## Motivation
+
+You're viewing a Help Scout convo and you want to change the customer linked to the conversation. Maybe you know that this is done via the customer profile UI on the convo sidebar, which looks something like this:
+
+<div style={{width: 320}}>
+  <Profile />
+</div>
+
+But imagine you don't really know how to do it, so you open Beacon and search for how to change a customer. Follow these steps:
+
+1. Open Beacon and search for the **Changing the customer on a conversation** Docs Article, or <a href="#" onClick={(e) => {e.preventDefault(); Beacon('article', '5cd58b3504286306738ef88e')}}>click here</a> to open it directly.
+2. Scroll down to the **How to change a customer** instructions where you'll see a big fat **Show me** button.
+3. Click it.
+
+
+## How it works
+
+The "Show me" button is added via the Docs Editor, but it's only visible when the Article is viewed inside Beacon. The button is powered by a data structure that looks something like this:
+
+```
+{
+  element: '#profile-card > .gear-icon',
+  message: 'Click the gear icon and then click on Change Customer'
+}
+```
+
+This defines the DOM element that you want to highlight and the message you want to show when the button is clicked. The idea is that if Beacon will only show the button if it can find the DOM element on the page.
+
+## Additional Exploration
+
+- This could easily evolve into a multi-step wizard that could be use not only for instructions but also for product onboarding.
+- As long as Beacon is on the page, it could be triggered via a JS API method like:
+```
+Beacon('show-me', {
+  element: '.btn',
+  message: 'Click me!'
+})
+```
+
+<div>
+  <h3>
+  <a href="#" onClick={(event) => {
+    event.preventDefault();
+    beaconStore.dispatch({
+    type: 'SHOW_ME',
+    payload: [{
+      selector: 'btn-1',
+      text: 'Now click here!'
+    }]
+  })
+  }}>Click me for a demo 👈</a>
+  </h3>
+</div>
+
+<table>
+  <tr>
+    <td><button id="btn-1" onClick={() => {
+      event.preventDefault();
+  beaconStore.dispatch({
+  type: 'SHOW_ME',
+  payload: [{
+    selector: 'btn-2',
+    text: `Click here and you're done!`
+  }]
+})
+}}>Click here!</button></td>
+    <td><button id="btn-2">I don't do anything</button></td>
+  </tr>
+</table>
+
+## Known Issues
+
+This is incredibly hacky, but it should work for most cases.
