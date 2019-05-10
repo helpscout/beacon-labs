@@ -44,12 +44,13 @@ The "Show me" button is added via the Docs Editor, but it's only visible when th
 }
 ```
 
-This defines the DOM element that you want to highlight and the message you want to show when the button is clicked. The idea is that if Beacon will only show the button if it can find the DOM element on the page.
+This defines the DOM element that you want to highlight and the message you want to show when the button is clicked. The idea is that Beacon will only show the button if it can find the DOM element on the page.
 
 ## Additional Exploration
 
-- This could easily evolve into a multi-step wizard that could be use not only for instructions but also for product onboarding.
+- This could easily evolve into a multi-step wizard that could be use not only for instructions but also for a product tour/onboarding.
 - As long as Beacon is on the page, it could be triggered via a JS API method like:
+
 ```
 Beacon('show-me', {
   element: '.btn',
@@ -90,4 +91,7 @@ Beacon('show-me', {
 
 ## Known Issues
 
-This is incredibly hacky, but it should work for most cases.
+- The core of this feature is pretty solid, but it's still hacky so you might need to refresh the page if it breaks.
+- The UI is made up, please try not to judge it by its looks :P
+- It should scroll the highlighted element into view.
+- It probably needs special treatment in mobile.
