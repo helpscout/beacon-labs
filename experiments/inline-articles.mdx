@@ -1,7 +1,7 @@
 ---
 name: Inline Articles
 menu: Experiments
-BOI: 5cd2ec8e0cd9cd00083ebcaf
+BOI: 5cf80120b773b0000a7466c3
 ---
 
 import Editor from '../src/components/Editor'
@@ -9,7 +9,7 @@ import Editor from '../src/components/Editor'
 # Inline Articles
 
 - Branch: [`inline-articles`](https://github.com/helpscout/beacon2/tree/inline-articles)
-- **Stage 0**
+- **Stage 1**
 
 ## What's this?
 
@@ -19,6 +19,8 @@ Initial discovery of the Inline Articles feature. This is based on [a spec](http
 
 <div>
   <h3>Take this for a spin: <a href="#" data-beacon-article-inline="5cac9a5d2c7d3a154461f02c">click here 👈</a></h3>
+  <h3 style={{textAlign: 'right'}}><a href="#" data-beacon-article-inline="5cac9a5d2c7d3a154461f02c">👉 Or click here</a></h3>
+  <p style={{textAlign: 'right'}}>If there's not enough space to the right of the link, it should show up on the left.</p>
 </div>
 
 ## How it works
@@ -48,7 +50,8 @@ Once we have this in place, we can play with formats to open an article with rel
 
 ## Known Issues
 
-- There are a couple of styling issues with the article's contents.
-- The scalation modal doesn't work. If you leave bad feedback for an article nothing will happen and you'll probably need to refresh the page to continue testing.
-- Scrolling messes up with the positioning. If you scroll before clicking the link, it will be off by the amount of pixels you scrolled.
-- This probably needs to be aware of the available space to the right, left, top, and bottom of the link so that we position it correctly no matter where the link is on the page.
+- <s>There are a couple of styling issues with the article's contents.</s>
+- <s>The scalation modal doesn't work. If you leave bad feedback for an article nothing will happen and you'll probably need to refresh the page to continue testing.</s>
+- <s>Scrolling messes up with the positioning. If you scroll before clicking the link, it will be off by the amount of pixels you scrolled.</s>
+- We probably need vertical position awareness.
+- It should work correctly when resizing the window.
