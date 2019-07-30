@@ -7,6 +7,7 @@ export default {
   htmlContext: {
     favicon: 'public/favicon.ico'
   },
+  indexHtml: 'public/index.html',
   themeConfig: {
     colors: {
       primary: '#1292EE'

@@ -1,0 +1,59 @@
+---
+name: Beacon Apps
+menu: Experiments
+BOI: 5d40ab841218850008efc087
+beaconId: "b82c41a2-7c66-469e-80f5-8efea98549b2"
+---
+
+# Beacon Apps
+
+- Branch: [`beacon-apps`](https://github.com/helpscout/beacon2/tree/beacon-apps)
+- **Stage 0**
+
+## What's this?
+
+Some initial exploration of the Beacon Apps feature, which would allow us to integrate third-party services in Beacon. Roughly based on [this spec](https://paper.dropbox.com/doc/Brief-Beacon-Apps--Ah3oqclObonCqK37G7Sq8diJAg-be3V2E1MJbsAvCHIwr1Qs).
+
+For now, I'm only focussing on "Suggestion Apps", which show up as cards on the Instant Answers screens, but the idea is to provide support for these apps in Chat and Messages.
+
+## Two types of Apps
+
+- **Basic Apps:** These apps have a simple UI, usually in the form of a card, and they get all the information they need by calling an endpoint of the third-party service. For example, a Status Page app would make a request to an API endpoint and
+show up only when needed, or a newsletter subscription app would make a POST request to send the email address to the appropriate service.
+
+Check out how Status Page app integration would look like in Beacon:
+
+<div>
+  <a href="#" onClick={(event) => {
+    event.preventDefault();
+    window.Beacon('open')
+    window.Beacon('config', {
+      showServiceOutage: true
+    })
+  }}>👉 Click here to simulate a service outage (don't worry, this is totally not real)</a>
+</div>
+
+- **Embeddable Apps:** These apps have a more complex UI and can be made of flows with multiple steps. In this case, it makes more sense to use an embeddable widget. It could be one developed and maintained by the third-party,
+or it could be developed by us using some sort of service API.
+
+For an example of an embeddable app, open the Beacon on this page scroll down to the **Help Scout Classes** card. The button there should take you through the flow of booking a time-slot using a [real Calendly calendar](https://calendly.com/maxi-helpscout/15min).
+
+![Demo](https://p-zkf42x.t2.n0.cdn.getcloudapp.com/items/o0ukpzY7/Image%202019-07-30%20at%205.55.55%20PM.png)
+
+One really cool thing about this method is that these types of embed usually come with some basic APIs that we can use to integrate with Beacon and provide a better user experience. For example, with the Calendly embed, we can use
+the customer data that we have from the `identify` method to prefill their form:
+
+```js
+Beacon('identify', {
+  name: 'haruki@murakami.com',
+  email: 'Haruki Murakami'
+})
+```
+
+![Demo2](https://p-zkf42x.t2.n0.cdn.getcloudapp.com/items/mXuEnLdo/Image%202019-07-30%20at%206.30.26%20PM.png)<br />_How the prefilled data looks in Calendly_
+
+## Next steps
+
+- Each app integration is different in its own way, but we should be able to define some general guidelines to support both basic and embeddable apps once we have a list of apps we would like to support as part of a phase 1.
+- Basic apps are straightforward, and they should all work pretty much the same. Embeddable apps can come with challenges because their implementations can vary so much.
+- We should also consider the "back-end" of this feature, or how the apps would be configured in Beacon Builder.
