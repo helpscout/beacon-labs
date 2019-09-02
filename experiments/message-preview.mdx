@@ -1,0 +1,69 @@
+---
+name: Message Preview
+menu: Experiments
+BOI: 5d6d69009140cf000859fcd7
+---
+
+import Alert from '../src/components/Alert'
+import Editor from '../src/components/Editor'
+import Play from 'react-feather/dist/icons/play'
+
+# Message Preview
+
+- Branch: [`message-preview-attachments`](https://github.com/helpscout/beacon2/tree/message-preview-attachments)
+- Pull Request: [#779](https://github.com/helpscout/beacon2/pull/779)
+- **Stage 3**
+
+## Summary
+
+This is a playground for Beacon JavaScript API's `message-preview` method, that can be used by Beacon Builder to show a Message preview and modify its contents in real-time. You can play with it in the demo below.
+
+<Alert>
+  Click the{' '}
+  <Play
+    width={15}
+    color="#2DC450"
+    fill="#2DC450"
+    style={{ marginBottom: -5 }}
+  />{' '}
+  icon to run the code examples.
+</Alert>
+
+## Demo
+
+<Editor>
+  {`Beacon('message-preview', {
+  title: 'Did you know?',
+  message: 'The 2019 edition of the Tour de France consisted of 22 teams, and the race was the 27th of the 38 events in the UCI World Tour.',
+  action: {
+    type: 'url',
+    text: 'Read more on the wiki',
+    url: 'https://en.wikipedia.org/wiki/2019_Tour_de_France',
+    attachment: true,
+    newWindow: true,
+    urlMetadata: {
+      url: 'https://en.wikipedia.org/wiki/2019_Tour_de_France',
+      type: 'rich',
+      title: '2019 Tour de France',
+      description: "The 2019 Tour de France was the 106th edition of the Tour de France, one of cycling's three Grand Tours. The 3,480 km (2,162 mi)-long race consisted of 21",
+      thumbnailUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Grand-Place%2C_Brussels_-_panorama%2C_June_2018_%28cropped%29.jpg/800px-Grand-Place%2C_Brussels_-_panorama%2C_June_2018_%28cropped%29.jpg',
+    }
+  }
+})
+`}
+</Editor>
+
+## Acceptance Criteria
+
+- While the Preview Message is visible, the Beacon enters read-only mode. This means that the FAB can't be clicked, the Message can't be closed, and the CTAs won't do anything.
+- To remove the Preview Message and return the Beacon to its normal state, you can call this method with a value of `null`:
+
+<Editor>{`Beacon('message-preview', null)`}</Editor>
+
+- To simulate an "empty state", call this method only passing a `subtitle` with the desired text:
+
+<Editor>
+  {`Beacon('message-preview', {
+  subtitle: "Customize your Message by choosing one or more options (left). A preview of your Message will be shown here...",
+})`}
+</Editor>
