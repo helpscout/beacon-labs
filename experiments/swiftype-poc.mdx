@@ -1,0 +1,23 @@
+---
+name: Swiftype Integration POC
+menu: Experiments
+BOI: 5d828d841a0a5b000a808ee0
+beaconId: 'b82c41a2-7c66-469e-80f5-8efea98549b2'
+---
+
+# Swiftype Integration POC
+
+- Branch: [`swiftype-poc`](https://github.com/helpscout/beacon2/tree/swiftype-poc)
+- **Stage 0**
+
+## What's this?
+
+Proof of Concept that explores an integration between Beacon and [Swiftype Site Search](https://swiftype.com/site-search) service.
+
+This particular example uses a mix of Help Scout Docs and a Swiftype Engine to power search results, so every time you search for something,
+two requests are made: one request uses Beacon API to search on the Docs Site linked to the Beacon (like a regular Beacon), and the other one uses Swiftype's API with an "Engine ID" (a public key) to
+search in a specific Engine that has been seeded with the contents of our [developer's site](https://developer.helpscout.com).
+
+## Try it out
+
+Open the Beacon and search for something like `mailbox api`, `css`, or `beacon`. Results should show in two sections.
