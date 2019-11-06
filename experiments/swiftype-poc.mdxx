@@ -5,6 +5,7 @@ BOI: 5d828d841a0a5b000a808ee0
 beaconId: 'b82c41a2-7c66-469e-80f5-8efea98549b2'
 ---
 
+# Swiftype Trial Expired. This no longer works.
 # Swiftype Integration POC
 
 - Branch: [`swiftype-poc`](https://github.com/helpscout/beacon2/tree/swiftype-poc)

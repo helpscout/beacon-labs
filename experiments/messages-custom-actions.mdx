@@ -1,0 +1,81 @@
+---
+name: Messages Custom Actions
+menu: Experiments
+BOI: 5dc31a0e15effb0008a2e0ca
+beaconId: "b82c41a2-7c66-469e-80f5-8efea98549b2"
+---
+
+# Messages Custom Actions
+
+- Branch: [`typeform-app-poc`](https://github.com/helpscout/beacon2/tree/typeform-app-poc)
+- **Stage 0**
+
+## What's this?
+
+Initial exploration into what would it take to add support for custom actions on Messages. This means that instead of having the Message's CTA execute one of our built-in actions (like "open Beacon" or "start a chat"),
+we'd give the User the ability to execute their own custom methods by hooking up to our JavaScript API.
+
+### Example: Trigger a third-party popup using a Message CTA
+
+We want to set up a Message so that when a customer clicks on the CTA, a Typeform survey shows up in a modal. We're using Typeform as an example here, but this can be literally anything you want.
+
+To do this, I'd select **Custom Action** as my Action type when creating the Message in Help Scout, and I'll give it an event name. This event name is what we use to distinguish this action from that of other Messages,
+but we could also auto-generate this string, or simply use the Message's ID. In this example the event name is `leave-feedback`.
+
+![Test](https://p-zkf42x.t2.n0.cdn.getcloudapp.com/items/7KuxWLWW/Image+2019-11-06+at+3.54.38+PM.png?v=2d2f32e44cc740e791960cc01257afe3)
+
+Then I'll use Beacon's JS API to set a callback for this event that would open my Typeform survey when the event fires. That code looks something like this:
+
+```js
+Beacon('on', 'leave-feedback', function() {
+  window.typeformPopup.open()
+})
+```
+
+And that's it. You can now have a Message CTA do whatever you want.
+
+<div>
+  <h3>For a demo <a href="#" onClick={(e) => {
+    e && e.preventDefault()
+    Beacon('show-message', '')
+    Beacon('show-message', 'c89df24a-9e79-4bf6-bee8-3d8008e49cfb', {
+      delay: 100,
+      force: true,
+      title: "We'd love your feedback!",
+      message: "Let us know what you think of our new website by completing this short survey. It'll take you less than a minute, we promise 😊",
+      action: {
+        type: 'custom',
+        text: 'Leave Feedback',
+        callback: (close) => {
+          console.log('adad')
+          window.typeformPopup.open()
+          close()
+        }
+      }
+    })
+  }}>click here 👈</a> and then click on the Message's CTA.</h3>
+</div>
+
+## Additional exploration
+
+This would be out of the scope of Custom Actions, but a combination of this feature with [Beacon Apps](/experiments-beacon-apps) could easily evolve into "Apps for Messages", in which third-party integrations (or "apps"),
+could be triggered and opened directly inside of the Message.
+
+Here's an example of that same Typeform survey, but this time embedded in the Message:
+
+<div>
+  <h3>For a demo <a href="#" onClick={(e) => {
+    e && e.preventDefault()
+    Beacon('show-message', '')
+    Beacon('show-message', 'c89df24a-9e79-4bf6-bee8-3d8008e49cfb', {
+      delay: 100,
+      force: true,
+      title: "We'd love your feedback!",
+      message: "Let us know what you think of our new website by completing this short survey. It'll take you less than a minute, we promise 😊",
+      action: {
+        type: 'typeform',
+        text: 'Leave Feedback',
+      }
+    })
+  }}>click here 👈</a> and then click on the Message's CTA.</h3>
+</div>
